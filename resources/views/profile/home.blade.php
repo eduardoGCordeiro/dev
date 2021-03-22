@@ -2,7 +2,10 @@
 
 @section('content')
             <div class="row mb-2">
-                    <div class="col-12 col-sm-6 col-md-6 col-lg-6 text-right">
+                    <div class="col-6">
+                        <h5>CURRÍCULOS</h5>
+                    </div>
+                    <div class="col-6 text-right">
                         <a href="{{route('profile.create')}}"
                             class="btn btn-success waves-effect waves-light mb-2" data-animation="fadein">
                             <i class="mdi mdi-plus-circle mr-1"></i> Novo Currículo

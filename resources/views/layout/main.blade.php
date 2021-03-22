@@ -9,8 +9,6 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="css/app.css">
-        <script src="js/app.js" charset="utf-8"></script>
 
         <!-- Styles -->
         <style>
@@ -22,9 +20,13 @@
                 font-family: 'Nunito', sans-serif;
             }
         </style>
+
+
+        <link rel="stylesheet" href="{{asset('css/app.css')}}">
+        <script src="{{asset('js/app.js')}}" charset="utf-8"></script>
     </head>
+    
     <body class="antialiased">
-        
         @component('components/header')@endcomponent()
 
         <div class="container-fluid bg-white">
