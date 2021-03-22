@@ -13,20 +13,35 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', ["uses" => '\App\Http\Controllers\ProfileController@index', "as" => "home"])
-->middleware('can:view, App\Model\Profile'); // List all
+/*  DEFAULT ROUTE */
 
-Route::get('/form', ["uses" => '\App\Http\Controllers\ProfileController@form', "as" => "create"])
-->middleware('can:create,App\Model\Profile'); // FORM Add new
+Route::get('/', function () {
+    return view('welcome');
+});
 
-Route::get('/form/{item}', ["uses" => '\App\Http\Controllers\ProfileController@form', "as" => "edit"])
-->middleware('can:update, App\Model\Profile'); // FORM Edit one
+/* PROFILE ROUTES */
+Route::group([
+    'as'     => 'profile.',
+    'prefix' => 'profile'
+], function () {
+    Route::get('/profile', ["uses" => '\App\Http\Controllers\ProfileController@index', "as" => "home"]);
+    Route::get('/profile/form', ["uses" => '\App\Http\Controllers\ProfileController@form', "as" => "create"]);
+    Route::get('/profile/form/{item}', ["uses" => '\App\Http\Controllers\ProfileController@form', "as" => "edit"]);
+    Route::post('/profile', ["uses" => '\App\Http\Controllers\ProfileController@save', "as" => "save"]);
+    Route::put('/profile/{item}', ["uses" => '\App\Http\Controllers\ProfileController@save', "as" => "update"]);
+    Route::get('/profile/delete/{item}', ["uses" => '\App\Http\Controllers\ProfileController@destroy', "as" => "delete"]);
+});
 
-Route::post('/', ["uses" => '\App\Http\Controllers\ProfileController@save', "as" => "save"])
-->middleware('can:create, App\Model\Profile'); // Save new
+/* EDUCATION LEVEL ROUTES */
 
-Route::put('/{item}', ["uses" => '\App\Http\Controllers\ProfileController@save', "as" => "update"])
-->middleware('can:update,App\Model\Profile'); // Save edit
-
-Route::get('/delete/{item}', ["uses" => '\App\Http\Controllers\ProfileController@destroy', "as" => "delete"])
-->middleware('can:delete,App\Model\Profile'); // Delete one
+Route::group([
+    'as'     => 'education_level.',
+    'prefix' => 'education_level'
+], function () {
+    Route::get('/education_level', ["uses" => '\App\Http\Controllers\EducationLevelController@index', "as" => "home"]);
+    Route::get('/education_level/form', ["uses" => '\App\Http\Controllers\EducationLevelController@form', "as" => "create"]);
+    Route::get('/education_level/form/{item}', ["uses" => '\App\Http\Controllers\EducationLevelController@form', "as" => "edit"]);
+    Route::post('/education_level', ["uses" => '\App\Http\Controllers\EducationLevelController@save', "as" => "save"]);
+    Route::put('/education_level/{item}', ["uses" => '\App\Http\Controllers\EducationLevelController@save', "as" => "update"]);
+    Route::get('/education_level/delete/{item}', ["uses" => '\App\Http\Controllers\EducationLevelController@destroy', "as" => "delete"]);
+});

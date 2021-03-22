@@ -9,6 +9,8 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="css/app.css">
+        <script src="js/app.js" charset="utf-8"></script>
 
         <!-- Styles -->
         <style>
@@ -22,11 +24,25 @@
         </style>
     </head>
     <body class="antialiased">
-                @hasSection('header')
-                    @yield('header')
-                @endif
-                @hasSection('content')
-                    @yield('content')
-                @endif
+        
+        @component('components/header')@endcomponent()
+
+        <div class="container-fluid bg-white">
+            <div class="row mt-5">
+                <div class="col-12"></div>
+            </div>
+
+            <div class="row">
+                <div class="col bg-light">
+                <div class="card">
+                    <div class="card-body">
+                        @hasSection('content')
+                            @yield('content')
+                        @endif
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </body>
 </html>
