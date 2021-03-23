@@ -44,6 +44,9 @@
                                     <a href="{{route('profile.delete', $item)}}" class="action-icon">
                                         <i class="mdi mdi-delete"></i>
                                     </a>
+                                    <a href="{{route('profile.download', $item)}}" class="action-icon">
+                                        <i class="mdi mdi-file"></i>
+                                    </a>
                                 </td>
                             </tr>
                             @endforeach

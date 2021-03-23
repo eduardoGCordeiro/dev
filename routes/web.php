@@ -30,6 +30,7 @@ Route::group([
     Route::post('/{item}', ["uses" => '\App\Http\Controllers\ProfileController@save', "as" => "update"]);
     Route::post('/', ["uses" => '\App\Http\Controllers\ProfileController@save', "as" => "save"]);
     Route::get('/delete/{item}', ["uses" => '\App\Http\Controllers\ProfileController@destroy', "as" => "delete"]);
+    Route::get('/file/{item}', ["uses" => '\App\Http\Controllers\ProfileController@downloadFile', "as" => "download"]);
 });
 
 /* EDUCATION LEVEL ROUTES */

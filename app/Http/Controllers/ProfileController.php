@@ -90,6 +90,17 @@ class ProfileController extends Controller
         return redirect()->route('profile.home');
     }
 
+    public function downloadFile(Profile $item)
+    {
+        if (!$item->exists) {
+            return abort(404);
+        }
+
+        $file = storage_path('app') .'/'. $item->file->file_path;
+        $filename = $item->file->original_filename .'.'. $item->file->extension;
+        return response()->download($file, $filename);
+    }
+
     private function saveUpload($file)
     {
         $path = str_replace('.', '/', 'public/Profile');

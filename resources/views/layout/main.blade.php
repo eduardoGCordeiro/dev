@@ -32,6 +32,9 @@
     <body class="antialiased">
         @component('components/header')@endcomponent()
 
+        @hasSection('js')
+            @yield('js')
+        @endif
         <div class="container-fluid bg-white">
             <div class="row mt-5">
                 <div class="col-12"></div>

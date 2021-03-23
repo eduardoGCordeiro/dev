@@ -1,5 +1,9 @@
 @extends('layout.main')
 
+@section('js')
+    <script src="{{asset('js/modules/profile/profile-form.js')}}"></script>
+@endsection
+
 @section('content')
                 <div class="row mb-4">
                     <div class="col-12">
@@ -73,10 +77,10 @@
                                     </div>
 
                                     <div class="col-4 form-group">
-                                        <label for="file">Currículo (.pdf, .docx ou .doc) * </label>
-                                        <div class="custom-file" id="file">
-                                            <input type="file" name="file" class="custom-file-input {{ $errors->has('file') ? 'is-invalid' : '' }}" id="validatedCustomFile" value="{{ old('file') ? : $item->file}}">
-                                            <label class="custom-file-label" for="validatedCustomFile">Selecione um arquivo...</label>
+                                        <label for="file-group">Currículo (.pdf, .docx ou .doc) * </label>
+                                        <div class="custom-file" id="file-group">
+                                            <input id="file" type="file" name="file" class="custom-file-input {{ $errors->has('file') ? 'is-invalid' : '' }}" id="validatedCustomFile" value="{{ old('file') ? : $item->file}}">
+                                            <label id="label-profile" class="custom-file-label" for="validatedCustomFile">Selecione um arquivo...</label>
                                             @if($errors->has('file'))
                                                 <div class="invalid-feedback">{{$errors->first('file')}}</div>
                                             @endif
