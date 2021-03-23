@@ -1,3 +1,3 @@
 require('./bootstrap');
-require('inputmask');
+import 'inputmask/index.js';
 import '@mdi/font/css/materialdesignicons.css'

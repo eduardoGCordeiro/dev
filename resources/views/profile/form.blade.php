@@ -62,7 +62,7 @@
 
                                     <div class="col-3 form-group">
                                         <label for="phone">Telefone *</label>
-                                        <input type="text" name="phone" data-mask-format="(99) 99999 - 9999" class="form-control {{ $errors->has('phone') ? 'is-invalid' : '' }}" id="phone" aria-describedby="Telefone" value="{{ old('phone') ? : $item->phone}}">
+                                        <input type="text" name="phone" data-inputmask="'mask': '99-9999999'" class="form-control {{ $errors->has('phone') ? 'is-invalid' : '' }}" id="phone" aria-describedby="Telefone" value="{{ old('phone') ? : $item->phone}}">
                                         @if($errors->has('phone'))
                                             <div class="invalid-feedback">{{$errors->first('phone')}}</div>
                                         @endif

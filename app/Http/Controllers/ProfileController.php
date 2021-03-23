@@ -24,7 +24,7 @@ class ProfileController extends Controller
             'file'               => [
                                         'required',
                                         'max:1024',
-                                        'mimeTypes:application/pdf, application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/msword'
+                                        'mimeTypes:application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/msword'
                                     ]
         ];
 
