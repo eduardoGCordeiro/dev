@@ -1,11 +1,14 @@
 @extends('layout.main')
 
 @section('content')
-            <div class="row mb-2">
-                    <div class="col-12 col-sm-6 col-md-6 col-lg-6 text-right">
+                <div class="row mb-2">
+                    <div class="col-6">
+                        <h5>ESCOLARIDADES</h5>
+                    </div>
+                    <div class="col-6 text-right">
                         <a href="{{route('education_level.create')}}"
                             class="btn btn-success waves-effect waves-light mb-2" data-animation="fadein">
-                            <i class="mdi mdi-plus-circle mr-1"></i> Nova escolaridade
+                            <i class="mdi mdi-plus-circle mr-1"></i> Nova Escolaridade
                         </a>
                     </div>
                 </div>

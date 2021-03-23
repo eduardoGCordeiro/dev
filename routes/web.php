@@ -39,10 +39,10 @@ Route::group([
     'as'     => 'education_level.',
     'prefix' => 'education_level'
 ], function () {
-    Route::get('/', ["uses" => '\App\Http\Controllers\ProfileController@index', "as" => "home"]);
-    Route::get('/form', ["uses" => '\App\Http\Controllers\ProfileController@form', "as" => "create"]);
-    Route::get('/form/{item}', ["uses" => '\App\Http\Controllers\ProfileController@form', "as" => "edit"]);
-    Route::post('/{item}', ["uses" => '\App\Http\Controllers\ProfileController@save', "as" => "update"]);
-    Route::post('/', ["uses" => '\App\Http\Controllers\ProfileController@save', "as" => "save"]);
-    Route::get('/delete/{item}', ["uses" => '\App\Http\Controllers\ProfileController@destroy', "as" => "delete"]);
+    Route::get('/', ["uses" => '\App\Http\Controllers\EducationLevelController@index', "as" => "home"]);
+    Route::get('/form', ["uses" => '\App\Http\Controllers\EducationLevelController@form', "as" => "create"]);
+    Route::get('/form/{item}', ["uses" => '\App\Http\Controllers\EducationLevelController@form', "as" => "edit"]);
+    Route::post('/{item}', ["uses" => '\App\Http\Controllers\EducationLevelController@save', "as" => "update"]);
+    Route::post('/', ["uses" => '\App\Http\Controllers\EducationLevelController@save', "as" => "save"]);
+    Route::get('/delete/{item}', ["uses" => '\App\Http\Controllers\EducationLevelController@destroy', "as" => "delete"]);
 });
