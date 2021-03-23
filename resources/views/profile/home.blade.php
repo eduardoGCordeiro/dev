@@ -35,7 +35,7 @@
                                 <td>{{$item->office}}</td>
                                 <td>{{$item->educationLevel->name}}</td>
                                 <td>{{$item->ip}}</td>
-                                <td>{{ date_format($item->created_at, 'd/m/Y H:m:i') }}</td>
+                                <td>{{ date_format($item->created_at, 'd/m/Y H:i:s') }}</td>
 
                                 <td>
                                     <a href="{{route('profile.edit', $item)}}" class="action-icon">

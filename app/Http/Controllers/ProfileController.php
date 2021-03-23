@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\ProfileSubmitMail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
+use App\Mail\ProfileSubmitMail;
 use App\Models\Profile;
 use App\Models\File;
-use Illuminate\Support\Facades\Mail;
 
 class ProfileController extends Controller
 {
@@ -17,7 +18,7 @@ class ProfileController extends Controller
             'name'               => ['required', 'max:255'],
             'office'             => ['required', 'max:255'],
             'education_level_id' => ['required', 'max:255'],
-            'email'              => ['required', 'max:255', 'unique:profiles,email,'. $data['id']],
+            'email'              => ['required', 'max:255'],
             'phone'              => ['required', 'max:255'],
             'observation'        => ['max:400'],
             'file'               => [
@@ -35,7 +36,6 @@ class ProfileController extends Controller
             'education_level_id.required' => 'O campo escolaridade é obrigatório.',
             'email.required'              => 'O campo email é obrigatório.',
             'email.max'                   => 'O campo email deve conter no máximo 255 caracteres.',
-            'email.unique'                => 'Este email já foi cadastrado, tente utilizar outro email.',
             'phone.required'              => 'O campo telefone é obrigatório.',
             'phone.max'                   => 'O campo telefone deve conter no máximo 255 caracteres.',
             'observation.max'             => 'O campo observação deve conter no máximo 400 caracteres.',
@@ -64,21 +64,26 @@ class ProfileController extends Controller
     {
         $this->validator(array_merge($request->all(), ['id' => $item->id]))->validate();
 
-        if (!$item->exists) {
-            $item = new Profile;
-            $item->ip = $request->ip();
+        try {
+            if (!$item->exists) {
+                $item = new Profile;
+                $item->ip = $request->ip();
+            }
+    
+            $item->fill($request->all());
+            $item->save();
+    
+            if ($item->exists) {
+                $item->file()->delete();
+                Mail::to($item->email)->send(new ProfileSubmitMail($item));
+            }
+    
+            $item->file()->save($this->saveUpload($request->file));
+        } catch (\Exception $e) {
+            return redirect()->back()->withInput();
+        } catch (\Swift_TransportException $e) {
+            return redirect()->back()->withInput();
         }
-
-
-        $item->fill($request->all());
-        $item->save();
-
-        if ($item->exists) {
-            $item->file()->delete();
-            Mail::to($item->email)->send(new ProfileSubmitMail($item));
-        }
-
-        $item->file()->save($this->saveUpload($request->file));
 
         return redirect()->route('profile.home');
     }
@@ -116,7 +121,7 @@ class ProfileController extends Controller
             'extension' => $file->extension() ?: $file->getClientOriginalExtension(),
             'bytes' => $file->getSize(),
             'mime_type' => $file->getMimeType(),
-            'md5_hash' => md5(\Storage::get($filePath))
+            'md5_hash' => md5(Storage::get($filePath))
         ]);
 
         $item->save();
