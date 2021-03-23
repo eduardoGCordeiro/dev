@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ProfileSubmitMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Profile;
 use App\Models\File;
+use Illuminate\Support\Facades\Mail;
 
 class ProfileController extends Controller
 {
@@ -62,10 +64,6 @@ class ProfileController extends Controller
     {
         $this->validator(array_merge($request->all(), ['id' => $item->id]))->validate();
 
-        if ($item->exists) {
-            $item->file()->delete();
-        }
-
         if (!$item->exists) {
             $item = new Profile;
             $item->ip = $request->ip();
@@ -74,6 +72,11 @@ class ProfileController extends Controller
 
         $item->fill($request->all());
         $item->save();
+
+        if ($item->exists) {
+            $item->file()->delete();
+            Mail::to($item->email)->send(new ProfileSubmitMail($item));
+        }
 
         $item->file()->save($this->saveUpload($request->file));
 
