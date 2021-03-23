@@ -17,7 +17,7 @@ class ProfileController extends Controller
             'email'              => ['required', 'max:255'],
             'phone'              => ['required', 'max:255'],
             'observation'        => ['max:400'],
-            'file'               => ['required']
+            'file'               => ['required', 'size:1024', 'mimes: pdf, docx, doc']
         ];
 
         $messages = [
@@ -32,6 +32,8 @@ class ProfileController extends Controller
             'phone.max'                   => 'O campo telefone deve conter no máximo 255 caracteres.',
             'observation.max'             => 'O campo observação deve conter no máximo 400 caracteres.',
             'file.required'               => 'O campo currículo é obrigatório.',
+            'file.size'                   => 'O campo currículo deve ser de no máximo 1MB.',
+            'file.mimes'                  => 'O campo currículo deve ser pdf, docx ou doc.'
         ];
 
 
