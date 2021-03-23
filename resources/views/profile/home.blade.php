@@ -22,6 +22,8 @@
                                 <th>Número</th>
                                 <th>Cargo desejado</th>
                                 <th>Escolaridade</th>
+                                <th>IP</th>
+                                <th>Enviado em</th>
                                 <th style="width: 150px;">Ações</th>
                             </tr>
                         </thead>
@@ -29,15 +31,17 @@
                             @foreach($items as $item)
                             <tr>
                                 <td>{{$item->name}}</td>
-                                <td>{{$item->number}}</td>
+                                <td>{{$item->phone}}</td>
                                 <td>{{$item->office}}</td>
                                 <td>{{$item->educationLevel->name}}</td>
+                                <td>{{$item->ip}}</td>
+                                <td>{{ date_format($item->created_at, 'd/m/Y H:m:i') }}</td>
 
                                 <td>
                                     <a href="{{route('profile.edit', $item)}}" class="action-icon">
                                         <i class="mdi mdi-pencil"></i>
                                     </a>
-                                    <a href="{{route('profile.delete', $item)}}" class="action-icon confirm-delete">
+                                    <a href="{{route('profile.delete', $item)}}" class="action-icon">
                                         <i class="mdi mdi-delete"></i>
                                     </a>
                                 </td>

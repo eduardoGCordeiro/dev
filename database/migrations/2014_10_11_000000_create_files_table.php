@@ -15,6 +15,7 @@ class CreateFilesTable extends Migration
     {
         Schema::create('files', function (Blueprint $table) {
             $table->increments('id');
+            $table->nullableMorphs('fileable');
             $table->string('file_path');
             $table->string('original_filename');
             $table->string('extension')->nullable();
@@ -23,7 +24,6 @@ class CreateFilesTable extends Migration
             $table->string('md5_hash')->nullable();
 
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

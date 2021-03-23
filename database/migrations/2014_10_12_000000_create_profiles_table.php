@@ -17,19 +17,15 @@ class CreateProfilesTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('number');
+            $table->string('phone');
             $table->string('office');
             $table->string('observation', 400)->nullable();
+            $table->string('ip')->nullable();
 
             $table->unsignedInteger('education_level_id');
             $table->foreign('education_level_id')
                   ->references('id')
                   ->on('education_levels');
-
-            $table->unsignedInteger('file_id');
-            $table->foreign('file_id')
-                  ->references('id')
-                  ->on('files');
 
             $table->softDeletes();
             $table->timestamps();
