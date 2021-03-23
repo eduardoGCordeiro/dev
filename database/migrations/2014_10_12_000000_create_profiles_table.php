@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUsersTable extends Migration
+class CreateProfilesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('number');
             $table->string('office');
-            $table->string('observation')->nullable();
+            $table->string('observation', 400)->nullable();
 
             $table->unsignedInteger('education_level_id');
             $table->foreign('education_level_id')

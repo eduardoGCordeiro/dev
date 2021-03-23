@@ -7,6 +7,11 @@ use App\Models\Profile;
 
 class ProfileController extends Controller
 {
+    private function validator(Request $request)
+    {
+
+    }
+
     public function index()
     {
         $items = Profile::paginate();
