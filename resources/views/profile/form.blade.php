@@ -9,7 +9,8 @@
 
                 <div class="row">
                     <div class="col-12">
-                            <form action="@if(@$item->exists) {{route('profile.update')}} @else {{route('profile.save')}} @endif" method="@if(@$item->exists) PUT @else POST @endif">
+                            <form action="{{ $item->exists ? route('profile.update') : route('profile.save')}}" method="{{ $item->exists ? 'PUT' : 'POST' }}">
+                                @csrf()
                                 <div class="row">
                                     <div class="col-6 form-group">
                                         <label for="name">Nome *</label>
@@ -74,8 +75,8 @@
                                     <div class="col-4 form-group">
                                         <label for="file">Currículo (.pdf, .docx ou .doc) * </label>
                                         <div class="custom-file" id="file">
-                                            <input type="file" class="custom-file-input" id="validatedCustomFile">
-                                            <label class="custom-file-label {{ $errors->has('file') ? 'is-invalid' : '' }}" for="validatedCustomFile">Selecione um arquivo...</label>
+                                            <input type="file" name="file" class="custom-file-input {{ $errors->has('file') ? 'is-invalid' : '' }}" id="validatedCustomFile">
+                                            <label class="custom-file-label" for="validatedCustomFile">Selecione um arquivo...</label>
                                             @if($errors->has('file'))
                                                 <div class="invalid-feedback">{{$errors->first('file')}}</div>
                                             @endif
